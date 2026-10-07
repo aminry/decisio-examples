@@ -85,7 +85,7 @@ def git_commit(path: Path) -> str | None:
 
 
 class Run:
-    """Use as a context manager: `with Run("support-routing", "gemma-4-12b", client=d) as run: run.log(...)`.
+    """Use as a context manager: `with Run("support-routing", "<base>", client=d) as run: run.log(...)`.
 
     `machine` names the hardware the SERVER ran on (card, power_limit_w, cpu, host, route, provider); a field not given
     is recorded as null and never guessed (/health does not report the server's version, so the caller states
