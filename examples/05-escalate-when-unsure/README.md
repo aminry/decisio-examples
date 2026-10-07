@@ -10,7 +10,10 @@ The example measures how well that number does the job, on 1,172 public multiple
 Each question is one request (`questions.py`): the question is the state, and the options are a `choice`.
 
 ```python
-state, questions = question_text, {"answer": choice("Which option answers the question correctly?", {"A": ..., "B": ..., "C": ..., "D": ...})}
+state, questions = (
+    question_text,
+    {"answer": choice("Which option answers the question correctly?", {"A": ..., "B": ..., "C": ..., "D": ...})},
+)
 answer = decisio.ask(state, questions)
 option, p = answer.top("answer")
 lane = "keep" if p >= 0.80 else "escalate"
