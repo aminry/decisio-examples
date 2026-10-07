@@ -110,7 +110,10 @@ class Decisio:
         return Answer(data["answers"], body, ms, float(server_ms) if server_ms else None, tasks, data)
 
     def health(self) -> dict:
+        """The server's /health. Ollama's decision route has none, so a 404 gives `{"ok": None, "engine": ...}`."""
         r = self._http.get("/health")
+        if r.status_code == 404:
+            return {"ok": None, "engine": "no /health route (Ollama?)"}
         r.raise_for_status()
         return r.json()
 
