@@ -4,7 +4,7 @@
 version = 1
 
 [[annotations]]
-path = ["**/*.json", "**/*.jsonl", "**/*.csv", "**/*.gz", "**/*.mp4", "**/*.gif", "**/*.png", "**/*.sha256", "**/*.txt", "uv.lock", "LICENSE"]
+path = ["**/*.json", "**/*.jsonl", "**/*.csv", "**/*.gz", "**/*.mp4", "**/*.gif", "**/*.png", "**/*.sha256", "**/*.txt", "**/*.in", "uv.lock", "LICENSE"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "Copyright contributors to the decisio-examples project"
 SPDX-License-Identifier = "Apache-2.0"
