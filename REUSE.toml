@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: Copyright contributors to the decisio-examples project
+# Licence annotations for the files that cannot carry an SPDX header: data, records, clips and generated files.
+version = 1
+
+[[annotations]]
+path = ["**/*.json", "**/*.jsonl", "**/*.csv", "**/*.gz", "**/*.mp4", "**/*.gif", "**/*.png", "**/*.sha256", "**/*.txt", "uv.lock", "LICENSE"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Copyright contributors to the decisio-examples project"
+SPDX-License-Identifier = "Apache-2.0"

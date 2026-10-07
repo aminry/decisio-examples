@@ -1,0 +1,24 @@
+[project]
+name = "decisio-examples"
+version = "0.0.0"
+description = "Small, real prototypes built on Decisio, each with a recorded run"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+dependencies = ["httpx>=0.28"]
+
+[dependency-groups]
+dev = ["pytest>=9", "ruff>=0.16"]
+
+[tool.setuptools]
+packages = ["common"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "examples", "integrations"]
+pythonpath = ["."]
