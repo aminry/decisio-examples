@@ -1,0 +1,14 @@
+{
+  "name": "decisio-integration-tanstack",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Checks the TanStack AI TypeSafe adapter against a Decisio server",
+  "license": "Apache-2.0",
+  "engines": { "node": ">=22" },
+  "scripts": { "verify": "node verify.mjs" },
+  "dependencies": {
+    "@tanstack/ai": "0.65.1",
+    "@tanstack/ai-typesafe": "0.1.8"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "decisio-integration-n8n",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Checks the n8n-nodes-jev community node against a Decisio server",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "verify": "node verify.mjs"
+  },
+  "dependencies": {
+    "n8n": "2.35.7",
+    "n8n-nodes-jev": "0.2.3",
+    "n8n-workflow": "2.35.3"
+  }
+}

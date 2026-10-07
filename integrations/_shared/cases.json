@@ -1,0 +1,31 @@
+{
+  "state": "Customer message: Stripe has failed to connect for three days and our invoices are stuck. Please help immediately.",
+  "questions": {
+    "urgent": {
+      "type": "noul",
+      "instructions": "Does this message require an urgent response?",
+      "criteria": {"true": "The customer needs help right now.", "false": "The message can wait."}
+    },
+    "department": {
+      "type": "choice",
+      "instructions": "Which team should handle this request?",
+      "criteria": {
+        "billing": "Payment or subscription issues.",
+        "technical": "Product bugs or integration failures.",
+        "sales": "Pricing or purchasing questions."
+      }
+    },
+    "frustration": {
+      "type": "score",
+      "instructions": "How frustrated does the customer appear?",
+      "criteria": ["Calm.", "Concerned but civil.", "Very angry."]
+    }
+  },
+  "malformed": {
+    "choice_without_criteria": {
+      "state": "Customer message: please help.",
+      "questions": {"department": {"type": "choice", "instructions": "Which team should handle this request?"}}
+    },
+    "no_questions": {"state": "Customer message: please help.", "questions": {}}
+  }
+}

@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 runs/**/decisions.jsonl
 data/
+node_modules/
