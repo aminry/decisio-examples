@@ -46,3 +46,9 @@ def measured_line(run_dir: Path | str, card_hour_usd: float = CARD_HOUR_USD) -> 
         f"{machine['card']} at {machine['power_limit_w']} W, {machine['cpu']}, decisio {machine['decisio_version']}; "
         f"${per_1000:.4f} per 1,000 decisions at ${card_hour_usd:.2f} per card-hour (run `{run_dir.as_posix()}`)."
     )
+
+
+if __name__ == "__main__":
+    import sys
+
+    print(measured_line(sys.argv[1]))

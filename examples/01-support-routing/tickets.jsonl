@@ -1,0 +1,60 @@
+{"id": "b1", "text": "I was charged twice for October. Both charges are 49.00 EUR, same day. Please refund one.", "queue": "billing", "urgent": false}
+{"id": "b2", "text": "Can you send me a PDF invoice for our March subscription with our VAT number on it? It is DE 811 128 455.", "queue": "billing", "urgent": false}
+{"id": "b3", "text": "Our card expired and the payment failed this morning. The dashboard now says the account will be suspended in 2 hours unless we pay.", "queue": "billing", "urgent": true, "also": "access"}
+{"id": "b4", "text": "What is the difference in price between the Team and Business plans if we have 14 seats?", "queue": "billing", "urgent": false}
+{"id": "b5", "text": "Refund request: we downgraded on the 3rd but were billed the full Business price on the 5th.", "queue": "billing", "urgent": false}
+{"id": "b6", "text": "The invoice you sent shows 20 seats but we only have 12 active users. Please correct it before our accountant closes the month on Friday.", "queue": "billing", "urgent": false}
+{"id": "b7", "text": "hi, how do i update the billing email? invoices go to someone who left", "queue": "billing", "urgent": false, "also": "access"}
+{"id": "b8", "text": "We were charged in USD although our contract says EUR. Finance is asking for an explanation today.", "queue": "billing", "urgent": false}
+{"id": "b9", "text": "Is there a discount for non-profits? We are a registered charity.", "queue": "billing", "urgent": false, "also": "other"}
+{"id": "b10", "text": "Annual renewal charged us 3,400 without any reminder email. We did not approve this. I want a refund.", "queue": "billing", "urgent": false, "also": "cancellation"}
+{"id": "a1", "text": "Since this morning none of our 40 staff can log in to the dashboard. We get \"session expired\" right after entering the password. Payroll is due today.", "queue": "access", "urgent": true, "also": "bug"}
+{"id": "a2", "text": "I forgot my password and the reset email never arrives. Checked spam too.", "queue": "access", "urgent": false}
+{"id": "a3", "text": "I lost my phone and cannot pass two-factor authentication. I have my recovery codes at home but I am travelling until Monday.", "queue": "access", "urgent": false}
+{"id": "a4", "text": "Please add jana.k@ourcompany.example as an admin on the workspace.", "queue": "access", "urgent": false}
+{"id": "a5", "text": "SSO with Okta stopped working after we rotated the certificate. Everyone is locked out.", "queue": "access", "urgent": true, "also": "bug"}
+{"id": "a6", "text": "my account is locked after too many attempts, how long until it opens again", "queue": "access", "urgent": false}
+{"id": "a7", "text": "A contractor needs read-only access to the reports section only. Is that possible?", "queue": "access", "urgent": false}
+{"id": "a8", "text": "I get 'you do not have permission to view this project' on a project I created myself yesterday.", "queue": "access", "urgent": false, "also": "bug"}
+{"id": "a9", "text": "The invite link my colleague received says it has expired, but I sent it 10 minutes ago.", "queue": "access", "urgent": false}
+{"id": "a10", "text": "Someone logged into my account from a country I have never been to. I changed the password but I see the sessions are still open.", "queue": "access", "urgent": true}
+{"id": "g1", "text": "Exporting a report to CSV downloads an empty file. Happens for every report since the update on Tuesday.", "queue": "bug", "urgent": false}
+{"id": "g2", "text": "The total on the summary page shows 1,204 but the table below adds up to 1,240.", "queue": "bug", "urgent": false}
+{"id": "g3", "text": "API returns 500 on POST /v2/events for every request since 09:40 UTC. Our ingestion is down and we are queueing events.", "queue": "bug", "urgent": true}
+{"id": "g4", "text": "The mobile app crashes on launch on Android 15 after the latest update.", "queue": "bug", "urgent": false}
+{"id": "g5", "text": "Dates in the German locale show as 10/07/2026 instead of 07.10.2026.", "queue": "bug", "urgent": false}
+{"id": "g6", "text": "Scheduled emails go out an hour late since daylight saving ended.", "queue": "bug", "urgent": false}
+{"id": "g7", "text": "When I drag a card to another column it jumps back after a second. Chrome and Firefox, not Safari.", "queue": "bug", "urgent": false}
+{"id": "g8", "text": "The search box ignores umlauts. Searching for Müller finds nothing, Muller finds it.", "queue": "bug", "urgent": false}
+{"id": "g9", "text": "Webhook deliveries are duplicated: each event arrives twice, about 200 ms apart, since yesterday evening.", "queue": "bug", "urgent": false}
+{"id": "g10", "text": "Our data on the production workspace looks reverted to last Friday. Entries made Monday and Tuesday are gone.", "queue": "bug", "urgent": true}
+{"id": "f1", "text": "It would be great to have a dark mode.", "queue": "feature", "urgent": false}
+{"id": "f2", "text": "Are you planning a Slack integration? We would pay extra for it.", "queue": "feature", "urgent": false}
+{"id": "f3", "text": "Could the CSV export include the tags column? Right now it leaves it out.", "queue": "feature", "urgent": false, "also": "bug"}
+{"id": "f4", "text": "We need single-sign-on with Azure AD. Is it on the roadmap and when?", "queue": "feature", "urgent": false}
+{"id": "f5", "text": "Please let us set a default assignee per project.", "queue": "feature", "urgent": false}
+{"id": "f6", "text": "Feature request: keyboard shortcut to mark a ticket as done.", "queue": "feature", "urgent": false}
+{"id": "f7", "text": "Any chance of an API endpoint to bulk archive items? We do it by hand for 2,000 items every month.", "queue": "feature", "urgent": false}
+{"id": "f8", "text": "Would be useful to see who last edited a card, like a small avatar on it.", "queue": "feature", "urgent": false}
+{"id": "f9", "text": "Can you add support for Turkish in the interface? Our whole team is Turkish.", "queue": "feature", "urgent": false}
+{"id": "f10", "text": "I wish reports could be scheduled weekly and sent to a list of people, not just to me.", "queue": "feature", "urgent": false}
+{"id": "c1", "text": "Please cancel our subscription effective end of the current month.", "queue": "cancellation", "urgent": false}
+{"id": "c2", "text": "We are shutting the company down. How do we close the account and get our data out?", "queue": "cancellation", "urgent": false}
+{"id": "c3", "text": "Delete my account and all my personal data under GDPR article 17. Please confirm in writing.", "queue": "cancellation", "urgent": false}
+{"id": "c4", "text": "how do i stop the subscription, i cant find the button", "queue": "cancellation", "urgent": false}
+{"id": "c5", "text": "We moved to another tool. Cancel, and tell me whether you keep our data afterwards and for how long.", "queue": "cancellation", "urgent": false}
+{"id": "c6", "text": "I want to pause the subscription for three months instead of cancelling. Is that an option?", "queue": "cancellation", "urgent": false, "also": "billing"}
+{"id": "c7", "text": "Cancel immediately and refund the unused part of the year. The product does not do what the sales call promised.", "queue": "cancellation", "urgent": false, "also": "billing"}
+{"id": "c8", "text": "Please close the second workspace but keep the main one.", "queue": "cancellation", "urgent": false}
+{"id": "c9", "text": "Our trial ends tomorrow and we do not want to continue. Make sure we are not charged.", "queue": "cancellation", "urgent": false}
+{"id": "c10", "text": "Deactivate all users in my team and close the account. We were acquired.", "queue": "cancellation", "urgent": false}
+{"id": "o1", "text": "Hello, I run a podcast about productivity tools and would like to interview your founder. Who should I talk to?", "queue": "other", "urgent": false}
+{"id": "o2", "text": "Do you have an office in Berlin? We could meet for a quick demo.", "queue": "other", "urgent": false}
+{"id": "o3", "text": "We offer SEO services and can double your traffic in 30 days. Reply for a free audit.", "queue": "other", "urgent": false}
+{"id": "o4", "text": "I am applying for the senior backend position. Where do I send my CV?", "queue": "other", "urgent": false}
+{"id": "o5", "text": "Your website footer still says 2025.", "queue": "other", "urgent": false}
+{"id": "o6", "text": "Sorry, wrong address. I meant to write to my landlord.", "queue": "other", "urgent": false}
+{"id": "o7", "text": "We are a reseller in Brazil and want to become a partner. Is there a partner programme?", "queue": "other", "urgent": false}
+{"id": "o8", "text": "Where can I find your security whitepaper and the SOC 2 report? Our procurement needs it before signing.", "queue": "other", "urgent": false}
+{"id": "o9", "text": "Thanks for the quick help last week, the team is very happy.", "queue": "other", "urgent": false}
+{"id": "o10", "text": "What are your support hours over the Christmas holidays?", "queue": "other", "urgent": false}

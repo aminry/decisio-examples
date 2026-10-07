@@ -71,9 +71,14 @@ class Answer:
 
 
 class Decisio:
-    """`Decisio()` talks to `$DECISIO_URL`, else http://127.0.0.1:8000."""
+    """`Decisio()` talks to `$DECISIO_URL`, else http://127.0.0.1:8000.
 
-    def __init__(self, base_url: str | None = None, timeout: float = 120.0):
+    A decisio server needs no model name. Ollama's decision route does: pass `model="aminroudaki/decisio-gemma"` (or set
+    `$DECISIO_MODEL`) and it is sent in the request body.
+    """
+
+    def __init__(self, base_url: str | None = None, timeout: float = 120.0, model: str | None = None):
+        self.model = model or os.environ.get("DECISIO_MODEL") or None
         self.base_url = (base_url or os.environ.get("DECISIO_URL") or DEFAULT_URL).rstrip("/")
         self._http = httpx.Client(base_url=self.base_url, timeout=timeout)
 
@@ -88,6 +93,8 @@ class Decisio:
 
     def ask(self, state: str | dict | list, questions: dict[str, dict]) -> Answer:
         body = {"state": state, "questions": questions}
+        if self.model:
+            body = {"model": self.model, **body}
         t0 = time.perf_counter()
         r = self._http.post("/v1/systemone", json=body)
         ms = (time.perf_counter() - t0) * 1000

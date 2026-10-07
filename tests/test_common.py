@@ -69,6 +69,13 @@ def test_ask_parses_answers_and_headers(server):
     assert a.request["questions"]["c"]["criteria"] == {"a": None, "b": None}
 
 
+def test_model_name_is_sent_when_given(server):
+    with Decisio(server, model="aminroudaki/decisio-gemma") as d:
+        assert d.ask("t", {"q": noul("yes?")}).request["model"] == "aminroudaki/decisio-gemma"
+    with Decisio(server) as d:
+        assert "model" not in d.ask("t", {"q": noul("yes?")}).request
+
+
 def test_error_status_raises_with_detail(server):
     with Decisio(server) as d, pytest.raises(DecisioError) as e:
         d.ask("boom", {"q": noul("yes?")})
