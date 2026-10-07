@@ -1,0 +1,62 @@
+{"id": "req-01", "request": "What does HTTP status 404 mean?", "action": "answer"}
+{"id": "req-02", "request": "Explain the difference between a list and a tuple in Python.", "action": "answer"}
+{"id": "req-03", "request": "Can you rewrite this sentence to sound more polite: 'Send me the report now.'", "action": "answer"}
+{"id": "req-04", "request": "What is a good name for a team that handles billing questions?", "action": "answer"}
+{"id": "req-05", "request": "Summarise in one line what a webhook is.", "action": "answer"}
+{"id": "req-06", "request": "Thanks, that helped.", "action": "answer"}
+{"id": "req-07", "request": "Give me three bullet points on why code review matters.", "action": "answer"}
+{"id": "req-08", "request": "How do you say 'good morning' in German?", "action": "answer"}
+{"id": "req-09", "request": "What is the capital of Australia?", "action": "answer"}
+{"id": "req-10", "request": "Is it better to use tabs or spaces?", "action": "answer"}
+{"id": "req-11", "request": "Write a one-sentence apology for a late reply.", "action": "answer"}
+{"id": "req-12", "request": "What does the acronym SLA stand for?", "action": "answer"}
+{"id": "req-13", "request": "What is our refund policy for annual plans?", "action": "search"}
+{"id": "req-14", "request": "Where can I find the on-call rota for next week?", "action": "search"}
+{"id": "req-15", "request": "What are the support hours over the holidays?", "action": "search"}
+{"id": "req-16", "request": "Does the Business plan include single sign-on?", "action": "search"}
+{"id": "req-17", "request": "How many seats does the Team plan allow?", "action": "search"}
+{"id": "req-18", "request": "Which regions do we host customer data in?", "action": "search"}
+{"id": "req-19", "request": "What is the process for requesting a data export?", "action": "search"}
+{"id": "req-20", "request": "What is the SLA for priority-one tickets?", "action": "search"}
+{"id": "req-21", "request": "Which browsers do we support for the dashboard?", "action": "search"}
+{"id": "req-22", "request": "What did we decide about the API rate limits last quarter?", "action": "search"}
+{"id": "req-23", "request": "Is there a student discount?", "action": "search"}
+{"id": "req-24", "request": "What is the maximum file size for uploads?", "action": "search"}
+{"id": "req-25", "request": "What is 17.5% of 2,340?", "action": "calculate"}
+{"id": "req-26", "request": "If we have 14 seats at 9 euros each plus a 20% VAT, what is the total?", "action": "calculate"}
+{"id": "req-27", "request": "Convert 72 degrees Fahrenheit to Celsius.", "action": "calculate"}
+{"id": "req-28", "request": "How many days are there between 2026-03-14 and 2026-09-30?", "action": "calculate"}
+{"id": "req-29", "request": "What is 3,200 divided by 16, times 7?", "action": "calculate"}
+{"id": "req-30", "request": "Our churn is 4 customers out of 250. What percentage is that?", "action": "calculate"}
+{"id": "req-31", "request": "What is the square root of 1,764?", "action": "calculate"}
+{"id": "req-32", "request": "Split 1,275 euros between 6 people.", "action": "calculate"}
+{"id": "req-33", "request": "What is 2 to the power of 17?", "action": "calculate"}
+{"id": "req-34", "request": "If a ticket takes 35 minutes and we have 52 tickets, how many hours is that?", "action": "calculate"}
+{"id": "req-35", "request": "Average of 12, 18, 25 and 31?", "action": "calculate"}
+{"id": "req-36", "request": "What is 9.5% of 18,400 rounded to the nearest euro?", "action": "calculate"}
+{"id": "req-37", "request": "Send the report.", "action": "ask_user"}
+{"id": "req-38", "request": "Book it for next week.", "action": "ask_user"}
+{"id": "req-39", "request": "Can you fix it?", "action": "ask_user"}
+{"id": "req-40", "request": "Cancel the order.", "action": "ask_user"}
+{"id": "req-41", "request": "Update the address.", "action": "ask_user"}
+{"id": "req-42", "request": "Make it shorter.", "action": "ask_user"}
+{"id": "req-43", "request": "Delete the old ones.", "action": "ask_user"}
+{"id": "req-44", "request": "Who should I forward this to?", "action": "ask_user"}
+{"id": "req-45", "request": "Change the price.", "action": "ask_user"}
+{"id": "req-46", "request": "Do the same as last time.", "action": "ask_user"}
+{"id": "req-47", "request": "Refund them.", "action": "ask_user"}
+{"id": "req-48", "request": "Set up the meeting.", "action": "ask_user"}
+{"id": "req-49", "request": "Email the customer at maria@clientco.example that her refund of 49 EUR was approved.", "action": "act", "call": {"tool": "send_email", "args": {"to": "maria@clientco.example", "subject": "Your refund", "body": "Your refund of 49 EUR was approved."}}, "risky": true}
+{"id": "req-50", "request": "Add a note to ticket 4412: customer prefers phone contact.", "action": "act", "call": {"tool": "add_note", "args": {"ticket": 4412, "note": "Customer prefers phone contact."}}, "risky": false}
+{"id": "req-51", "request": "Refund order 88123 in full, it was 2,400 EUR.", "action": "act", "call": {"tool": "issue_refund", "args": {"order": 88123, "amount_eur": 2400}}, "risky": true}
+{"id": "req-52", "request": "Create a ticket for the login problem Jana reported.", "action": "act", "call": {"tool": "create_ticket", "args": {"title": "Login problem reported by Jana", "queue": "access"}}, "risky": false}
+{"id": "req-53", "request": "Delete the test workspace 'sandbox-17'.", "action": "act", "call": {"tool": "delete_workspace", "args": {"name": "sandbox-17"}}, "risky": true}
+{"id": "req-54", "request": "Remind me tomorrow at 9 to call the supplier.", "action": "act", "call": {"tool": "set_reminder", "args": {"at": "tomorrow 09:00", "text": "Call the supplier"}}, "risky": false}
+{"id": "req-55", "request": "Email the whole customer list about the maintenance window on Friday.", "action": "act", "call": {"tool": "send_email", "args": {"to": "all-customers@ourcompany.example", "subject": "Maintenance window", "body": "We will be down Friday 22:00 to 23:00."}}, "risky": true}
+{"id": "req-56", "request": "Move ticket 4419 to the billing queue.", "action": "act", "call": {"tool": "move_ticket", "args": {"ticket": 4419, "queue": "billing"}}, "risky": false}
+{"id": "req-57", "request": "Close the account of customer 5530 as requested.", "action": "act", "call": {"tool": "close_account", "args": {"customer": 5530}}, "risky": true}
+{"id": "req-58", "request": "Tag ticket 4420 as 'urgent'.", "action": "act", "call": {"tool": "add_tag", "args": {"ticket": 4420, "tag": "urgent"}}, "risky": false}
+{"id": "req-59", "request": "Refund 12 EUR to order 88201, shipping was charged twice.", "action": "act", "call": {"tool": "issue_refund", "args": {"order": 88201, "amount_eur": 12}}, "risky": false}
+{"id": "req-60", "request": "Send myself a copy of today's report.", "action": "act", "call": {"tool": "send_email", "args": {"to": "me@ourcompany.example", "subject": "Today's report", "body": "(attached)"}}, "risky": false}
+{"id": "req-61", "request": "Reset the password for user lukas@ourcompany.example.", "action": "act", "call": {"tool": "reset_password", "args": {"user": "lukas@ourcompany.example"}}, "risky": true}
+{"id": "req-62", "request": "Assign ticket 4425 to Sofia.", "action": "act", "call": {"tool": "assign_ticket", "args": {"ticket": 4425, "to": "Sofia"}}, "risky": false}

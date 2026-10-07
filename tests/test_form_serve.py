@@ -22,12 +22,14 @@ HERE = Path(__file__).resolve().parents[1] / "examples" / "03-form-validator"
 def serve_module():
     import sys
 
+    sys.modules.pop("questions", None)
     sys.path.insert(0, str(HERE))
     spec = importlib.util.spec_from_file_location("form_serve", HERE / "serve.py")
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     yield mod
     sys.path.remove(str(HERE))
+    sys.modules.pop("questions", None)
 
 
 def start(handler_cls):

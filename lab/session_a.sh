@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Copyright contributors to the decisio-examples project
-# Card session A: record examples 1, 2 and 3 against a running decisio server and print each run's measured line.
+# Card session A: record examples 1 to 4 against a running decisio server and print each run's measured line.
 #
 #   DECISIO_URL=http://127.0.0.1:18000 CARD="NVIDIA RTX PRO 6000 Blackwell Workstation Edition" POWER_W=585 \
 #   CPU="AMD Ryzen Threadripper 9960X" DECISIO_VERSION=0.9.0 lab/session_a.sh
@@ -43,10 +43,11 @@ FLAGS=(--record --card "$CARD" --power-limit "$POWER_W" --cpu "$CPU" --decisio-v
 uv run python examples/01-support-routing/run.py --label "$BASE" "${FLAGS[@]}"
 uv run python examples/02-moderation-gate/run.py --label "$BASE" "${FLAGS[@]}"
 uv run python examples/03-form-validator/run.py --label "$BASE" "${FLAGS[@]}"
+uv run python examples/04-tool-decision/run.py --label "$BASE" "${FLAGS[@]}"
 
 echo
 echo "measured lines"
-for run in examples/0[123]-*/runs/*_"$BASE"; do
+for run in examples/0[1234]-*/runs/*_"$BASE"; do
     echo "$run"
     uv run python -m common.line "$run"
 done
