@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright contributors to the decisio-examples project
 """Route a feed of support tickets with one request per ticket, record the run, and report what it got right.
 
-    python examples/01-support-routing/run.py --url http://127.0.0.1:8000 --label gemma-4-12b ...
+    python examples/01-support-routing/run.py --url http://127.0.0.1:8000 --label <base> ...
 
 Without --record the run is a plumbing check: it prints the report and writes nothing, which is what the CPU stand-in
 and any development run should do. A recorded run names the server's machine (--card, --power-limit, --cpu,

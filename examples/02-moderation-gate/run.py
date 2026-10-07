@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: Copyright contributors to the decisio-examples project
 """Score the gate on labelled prompts and report what it lets through, holds and blocks.
 
-    python examples/02-moderation-gate/run.py --url http://127.0.0.1:8000 --label gemma-4-12b --record ...
+    python examples/02-moderation-gate/run.py --url http://127.0.0.1:8000 --label <base> --record ...
 
 Without --record it is a plumbing check and writes nothing (use that on the CPU stand-in).
 """

@@ -23,7 +23,7 @@ A classifier that only says yes or no cannot tell you which messages deserve a s
 ## Run it
 
 You need a Decisio server (see the [decisio README](https://github.com/aminry/decisio)).
-This example was written against decisio 0.9.0.
+This example was written against decisio 0.9.0 and runs on whichever base the server serves; it names none.
 
 ```bash
 uv sync

@@ -1,0 +1,114 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- SPDX-FileCopyrightText: Copyright contributors to the decisio-examples project -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soft validation with Decisio</title>
+<link rel="icon" href="data:,">
+<style>
+  :root { color-scheme: light dark; --bg:#f6f7f9; --card:#fff; --ink:#15181d; --muted:#5b6470; --line:#d9dde3;
+          --ok:#1a7f4b; --warn:#a15c00; --warn-bg:#fff4e0; --accent:#2457d6; --on-accent:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#101215; --card:#181b20; --ink:#eceef2; --muted:#9aa3af;
+          --line:#2c313a; --ok:#4cc38a; --warn:#f0b254; --warn-bg:#2a2112; --accent:#7ba2ff; --on-accent:#0b1020; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;
+         display:grid; place-items:start center; padding:48px 16px; }
+  main { width:100%; max-width:560px; }
+  h1 { font-size:1.25rem; margin:0 0 4px; }
+  p.lede { margin:0 0 24px; color:var(--muted); font-size:.95rem; }
+  form { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:24px; }
+  .field { margin-bottom:16px; }
+  label { display:block; font-weight:600; margin-bottom:6px; font-size:.95rem; }
+  input, textarea { width:100%; font:inherit; color:inherit; background:transparent; border:1px solid var(--line);
+         border-radius:8px; padding:10px 12px; }
+  input:focus, textarea:focus { outline:2px solid var(--accent); outline-offset:1px; }
+  textarea { min-height:104px; resize:vertical; }
+  .status { min-height:1.5em; margin-top:6px; font-size:.85rem; color:var(--muted); display:flex; gap:8px; align-items:center; }
+  .status .meter { flex:0 0 72px; height:6px; border-radius:3px; background:var(--line); overflow:hidden; }
+  .status .meter i { display:block; height:100%; background:var(--ok); width:0; transition:width .15s; }
+  .status.warn { color:var(--warn); }
+  .status.warn .meter i { background:var(--warn); }
+  .status.warn .text { background:var(--warn-bg); border-radius:4px; padding:1px 6px; }
+  button { font:inherit; font-weight:600; background:var(--accent); color:var(--on-accent); border:0; border-radius:8px; padding:10px 18px; cursor:pointer; }
+  button:disabled { opacity:.6; cursor:default; }
+  #summary { margin-top:16px; color:var(--muted); font-size:.85rem; min-height:1.4em; }
+  code { font:.85em ui-monospace,SFMono-Regular,Menlo,monospace; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Contact us</h1>
+  <p class="lede">Each field is checked a moment after you stop typing. A warning never blocks the form.</p>
+  <form id="form" novalidate>
+    <div class="field"><label for="job_title">Job title</label>
+      <input id="job_title" name="job_title" autocomplete="off" aria-describedby="s-job_title">
+      <div class="status" id="s-job_title" aria-live="polite"></div></div>
+    <div class="field"><label for="company">Company</label>
+      <input id="company" name="company" autocomplete="off" aria-describedby="s-company">
+      <div class="status" id="s-company" aria-live="polite"></div></div>
+    <div class="field"><label for="message">How can we help?</label>
+      <textarea id="message" name="message" aria-describedby="s-message"></textarea>
+      <div class="status" id="s-message" aria-live="polite"></div></div>
+    <button type="submit" id="send">Send</button>
+    <div id="summary" aria-live="polite"></div>
+  </form>
+</main>
+<script>
+const WORDS = {job_title: "a job title", company: "an organisation name", message: "a real request"};
+let cfg;
+const fields = ["job_title", "company", "message"];
+const $ = (id) => document.getElementById(id);
+const timers = {};
+
+async function ask(state, names, trigger) {
+  const questions = Object.fromEntries(names.map((n) => [n, cfg.questions[n]]));
+  const res = await fetch("/ask", {method: "POST", headers: {"content-type": "application/json"},
+    body: JSON.stringify({state, questions, meta: {trigger, fields: names}})});
+  const body = await res.json();
+  if (!res.ok) throw new Error(body.detail || res.status);
+  return {answers: body.answers, ms: Number(res.headers.get("x-decisio-server-ms")) || null, rtt: body.latency_ms};
+}
+
+function show(name, p, ms) {
+  const warn = p < cfg.warn_below;
+  const el = $("s-" + name);
+  el.className = "status" + (warn ? " warn" : "");
+  el.innerHTML = `<span class="meter"><i style="width:${Math.round(p * 100)}%"></i></span>` +
+    `<span class="text">${warn ? "This does not look like " + WORDS[name] + "." : "Looks fine."} ` +
+    `<code>${p.toFixed(2)}</code>${ms === null ? "" : " · " + Math.round(ms) + " ms"}</span>`;
+}
+
+async function check(name) {
+  const value = $(name).value.trim();
+  if (!value) { $("s-" + name).textContent = ""; return; }
+  try {
+    const r = await ask({[name]: value}, [name], "typing");
+    show(name, r.answers[name].noul, r.ms);
+  } catch (e) { $("s-" + name).textContent = "Could not check: " + e.message; }
+}
+
+fields.forEach((n) => {
+  $(n).addEventListener("input", () => { clearTimeout(timers[n]); timers[n] = setTimeout(() => check(n), 600); });
+});
+
+$("form").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const state = Object.fromEntries(fields.map((n) => [n, $(n).value.trim()]));
+  const filled = fields.filter((n) => state[n]);
+  if (!filled.length) return;
+  $("send").disabled = true;
+  try {
+    const r = await ask(state, filled, "send");
+    filled.forEach((n) => show(n, r.answers[n].noul, null));
+    const flagged = filled.filter((n) => r.answers[n].noul < cfg.warn_below).length;
+    $("summary").textContent = `Sent. ${filled.length} fields checked in one request, ${Math.round(r.ms)} ms; ${flagged} flagged.`;
+  } catch (e) { $("summary").textContent = "Could not check: " + e.message; }
+  $("send").disabled = false;
+});
+
+fetch("/config").then((r) => r.json()).then((c) => { cfg = c; });
+</script>
+</body>
+</html>

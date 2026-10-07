@@ -29,7 +29,7 @@ The sweep table below shows what other values would have done, so you can pick y
 
 You need a Decisio server.
 The README of [decisio](https://github.com/aminry/decisio) has the GPU, Docker, Mac and Ollama paths.
-This example was written against decisio 0.9.0.
+This example was written against decisio 0.9.0 and runs on whichever base the server serves; it names none.
 
 ```bash
 git clone https://github.com/aminry/decisio-examples
@@ -41,7 +41,8 @@ uv run python examples/01-support-routing/run.py --url http://127.0.0.1:8000
 Add `--record --label <name>` and the machine flags (`--card`, `--power-limit`, `--cpu`, `--decisio-version`) to write a run record under `runs/`.
 Without `--record` it is a plumbing check and writes nothing.
 On the CPU stand-in it proves the steps work and nothing more.
-On Ollama pass `--model aminroudaki/decisio-gemma`; Ollama builds its own prompt and applies no calibration, so its probabilities are not the ones measured here.
+On the laptop path, Ollama serves its Gemma 4 12B listing, because that is the one that fits a 16 GB machine: pass `--model aminroudaki/decisio-gemma`.
+Ollama builds its own prompt and applies no calibration, so its probabilities are not the ones measured here.
 
 ## The tickets
 
