@@ -128,3 +128,16 @@ class Decisio:
         if r.status_code != 200:
             raise DecisioError(r.status_code, r.text)
         return r.json()
+
+    def list_tasks(self) -> dict:
+        r = self._http.get("/v1/tasks")
+        r.raise_for_status()
+        return r.json()
+
+    def delete_task(self, task_id: str) -> bool:
+        """DELETE /v1/tasks/{id}; False when there was no such task."""
+        r = self._http.delete(f"/v1/tasks/{task_id}")
+        if r.status_code == 404:
+            return False
+        r.raise_for_status()
+        return True
