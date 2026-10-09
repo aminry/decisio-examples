@@ -98,4 +98,5 @@ The measured line, from the record:
 | `demo.py` | A seeded live sample, with an optional local second step |
 | `runs/` | The recorded runs |
 
+Decisio is built by [Tachara AI Lab](https://huggingface.co/tachara-ai).
 Decisio is an independent project, not affiliated with or endorsed by TypeSafe.

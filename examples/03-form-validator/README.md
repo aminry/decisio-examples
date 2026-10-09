@@ -97,4 +97,5 @@ The record and the clip are checked against each other: the number of requests o
 | `run.py` | Replays the forms through the questions and writes the report |
 | `runs/` | The recorded runs |
 
+Decisio is built by [Tachara AI Lab](https://huggingface.co/tachara-ai).
 Decisio is an independent project, not affiliated with or endorsed by TypeSafe.

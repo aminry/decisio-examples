@@ -1,5 +1,6 @@
 # Integrations
 
+Decisio is built by [Tachara AI Lab](https://huggingface.co/tachara-ai).
 Decisio is an independent project, not affiliated with or endorsed by TypeSafe.
 It implements TypeSafe's published System One wire format, so integrations written for that format can be pointed at a Decisio server.
 This folder checks five such integrations, each written and maintained by someone else, against a Decisio server.

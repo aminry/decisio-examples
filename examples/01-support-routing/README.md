@@ -90,4 +90,5 @@ The measured line, from the record:
 | `run.py` | Asks every ticket, records the run, writes `report.md` and `report.json` |
 | `runs/` | The recorded runs: every request as sent and every answer in full |
 
+Decisio is built by [Tachara AI Lab](https://huggingface.co/tachara-ai).
 Decisio is an independent project, not affiliated with or endorsed by TypeSafe.

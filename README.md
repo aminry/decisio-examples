@@ -3,6 +3,7 @@
 Small, real prototypes built on [Decisio](https://github.com/aminry/decisio), the open-source serving layer for decisions.
 Typed questions about a piece of text go in, a probability for every option comes out, from one forward pass of a frozen open checkpoint.
 
+Decisio is built by [Tachara AI Lab](https://huggingface.co/tachara-ai).
 Decisio is an independent project, not affiliated with or endorsed by TypeSafe.
 It implements TypeSafe's published System One wire format, so integrations built for that format work against it.
 

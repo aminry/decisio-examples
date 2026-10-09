@@ -119,4 +119,5 @@ At the preset (keep at 0.50), and the cross-encoder at the same amount of contex
 | `baseline_crossencoder.py` | The cross-encoder reranker on the same pairs, at the same amount of context |
 | `runs/` | The recorded runs |
 
+Decisio is built by [Tachara AI Lab](https://huggingface.co/tachara-ai).
 Decisio is an independent project, not affiliated with or endorsed by TypeSafe.

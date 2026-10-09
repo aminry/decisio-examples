@@ -103,4 +103,5 @@ The measured line, from the record (62 next-step requests and 14 risk questions)
 | `corpus.md` | Eight fictional handbook lines the search runs over |
 | `runs/` | The recorded runs |
 
+Decisio is built by [Tachara AI Lab](https://huggingface.co/tachara-ai).
 Decisio is an independent project, not affiliated with or endorsed by TypeSafe.

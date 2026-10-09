@@ -89,4 +89,5 @@ The measured line, from the record (it covers the gate only, not the chat model 
 | `demo.py` | The gate in front of a local chat model, on a seeded sample |
 | `runs/` | The recorded runs |
 
+Decisio is built by [Tachara AI Lab](https://huggingface.co/tachara-ai).
 Decisio is an independent project, not affiliated with or endorsed by TypeSafe.

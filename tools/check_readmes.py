@@ -21,6 +21,7 @@ BANNED = [
 DASHES = (chr(0x2014), chr(0x2013))
 SECTIONS = ("## When not to use this", "## Where it failed", "## What it measured")
 NONAFFILIATION = "not affiliated with or endorsed by TypeSafe"
+BUILT_BY = "Decisio is built by [Tachara AI Lab](https://huggingface.co/tachara-ai)."
 
 
 def check(public: bool) -> list[str]:
@@ -43,6 +44,10 @@ def check(public: bool) -> list[str]:
                     problems.append(f"{rel}: missing the section '{s}'")
             if NONAFFILIATION not in text:
                 problems.append(f"{rel}: missing the non-affiliation line")
+            if BUILT_BY not in text:
+                problems.append(f"{rel}: missing the line that says who builds Decisio")
+        if str(rel) == "README.md" and BUILT_BY not in text:
+            problems.append(f"{rel}: missing the line that says who builds Decisio")
         if public and "PENDING" in text:
             problems.append(f"{rel}: still holds a PENDING marker")
     return problems
