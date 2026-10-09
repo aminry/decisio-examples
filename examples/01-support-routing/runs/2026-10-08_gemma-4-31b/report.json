@@ -1,0 +1,116 @@
+{
+  "tickets": 60,
+  "accept_at": 0.8,
+  "page_at": 0.5,
+  "at_preset": {
+    "threshold": 0.8,
+    "routed": 58,
+    "of": 60,
+    "coverage": 0.967,
+    "correct": 57,
+    "accuracy": 0.983,
+    "accuracy_ci95": [
+      0.909,
+      0.997
+    ]
+  },
+  "all_tickets_accuracy": 0.983,
+  "sweep": [
+    {
+      "threshold": 0.5,
+      "routed": 60,
+      "of": 60,
+      "coverage": 1.0,
+      "correct": 59,
+      "accuracy": 0.983,
+      "accuracy_ci95": [
+        0.911,
+        0.997
+      ]
+    },
+    {
+      "threshold": 0.6,
+      "routed": 59,
+      "of": 60,
+      "coverage": 0.983,
+      "correct": 58,
+      "accuracy": 0.983,
+      "accuracy_ci95": [
+        0.91,
+        0.997
+      ]
+    },
+    {
+      "threshold": 0.7,
+      "routed": 59,
+      "of": 60,
+      "coverage": 0.983,
+      "correct": 58,
+      "accuracy": 0.983,
+      "accuracy_ci95": [
+        0.91,
+        0.997
+      ]
+    },
+    {
+      "threshold": 0.8,
+      "routed": 58,
+      "of": 60,
+      "coverage": 0.967,
+      "correct": 57,
+      "accuracy": 0.983,
+      "accuracy_ci95": [
+        0.909,
+        0.997
+      ]
+    },
+    {
+      "threshold": 0.9,
+      "routed": 57,
+      "of": 60,
+      "coverage": 0.95,
+      "correct": 57,
+      "accuracy": 1.0,
+      "accuracy_ci95": [
+        0.937,
+        1.0
+      ]
+    },
+    {
+      "threshold": 0.95,
+      "routed": 49,
+      "of": 60,
+      "coverage": 0.817,
+      "correct": 49,
+      "accuracy": 1.0,
+      "accuracy_ci95": [
+        0.927,
+        1.0
+      ]
+    }
+  ],
+  "urgent": {
+    "gold_urgent": 6,
+    "paged": 29,
+    "paged_and_urgent": 6,
+    "urgent_missed": []
+  },
+  "confident_misses": [
+    {
+      "id": "f4",
+      "gold": "feature",
+      "queue": "access",
+      "p_queue": 0.8518,
+      "lane": "access"
+    }
+  ],
+  "most_confident_misses": [
+    {
+      "id": "f4",
+      "gold": "feature",
+      "queue": "access",
+      "p_queue": 0.8518,
+      "lane": "access"
+    }
+  ]
+}

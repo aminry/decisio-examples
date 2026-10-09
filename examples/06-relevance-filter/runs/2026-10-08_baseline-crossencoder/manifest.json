@@ -1,0 +1,10 @@
+{
+  "example": "06-relevance-filter-baseline",
+  "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+  "date": "2026-10-08",
+  "command": "examples/06-relevance-filter/baseline_crossencoder.py --match-run examples/06-relevance-filter/runs/2026-10-08_gemma-4-31b --record",
+  "python": "3.13.14",
+  "host": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "seconds": 5.7,
+  "note": "quality only; this CPU's time is not comparable with a server on a card"
+}

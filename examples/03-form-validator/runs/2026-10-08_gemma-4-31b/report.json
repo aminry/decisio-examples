@@ -1,0 +1,27 @@
+{
+  "forms": 40,
+  "warn_below": 0.3,
+  "fields": {
+    "job_title": {
+      "valid_fields": 32,
+      "invalid_fields": 8,
+      "valid_flagged": [],
+      "invalid_caught": 8,
+      "invalid_missed": []
+    },
+    "company": {
+      "valid_fields": 31,
+      "invalid_fields": 9,
+      "valid_flagged": [],
+      "invalid_caught": 9,
+      "invalid_missed": []
+    },
+    "message": {
+      "valid_fields": 32,
+      "invalid_fields": 8,
+      "valid_flagged": [],
+      "invalid_caught": 8,
+      "invalid_missed": []
+    }
+  }
+}

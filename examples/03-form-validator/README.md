@@ -27,6 +27,8 @@ The page asks in two ways, and both are in the record:
 ## Run it
 
 You need a Decisio server (see the [decisio README](https://github.com/aminry/decisio)).
+With no flag, decisio 0.10.0 serves Gemma 4 31B, the default base (a 96 GB card; the decisio README's "Choosing a base" says when to pick another).
+The example runs on whichever base the server serves.
 A Decisio server sends no CORS headers, so a page cannot call it from another origin.
 `serve.py` is a small same-origin server: it serves the page and passes `POST /ask` on to the server's `/v1/systemone`, adding nothing and changing nothing.
 
@@ -54,13 +56,24 @@ Eight to nine invalid values per field is small, so read every rate below as an 
 
 ## What it measured
 
-<!-- PENDING: card session A. The recorded run, its report and the measured line replace this block. -->
-Not run yet.
+Recorded 2026-10-08 in Lab 2's card session (`runs/2026-10-08_gemma-4-31b/`): Gemma 4 31B, the default base of decisio 0.10.0, on one RTX PRO 6000 Blackwell Workstation Edition at 600 W and an AMD EPYC 9654.
+The record is labelled decisio 0.9.0, as recorded: the server was decisio #114 at `bc74193`, before the 0.10.0 tag, serving Google's weights quantised to FP8 on load.
+
+The measured line, from the record:
+
+> 40 decisions, median 73.8 ms server time, gemma-4-31b, NVIDIA RTX PRO 6000 Blackwell Workstation Edition at 600 W, AMD EPYC 9654 96-Core Processor, decisio 0.9.0; $0.0312 per 1,000 decisions at $1.50 per card-hour (run `examples/03-form-validator/runs/2026-10-08_gemma-4-31b`).
+
+- The replay asks all three fields of a form in one request, as the page does on Send. The page's per-field requests while typing are not in this record.
+- Invalid values flagged: 8 of 8 job titles, 9 of 9 company names and 8 of 8 messages.
+- Valid values flagged: 0 of 32 job titles, 0 of 31 company names and 0 of 32 messages (the 95% intervals reach 10.7% to 11.0%).
 
 ## Where it failed
 
-<!-- PENDING: card session A. A valid value that was flagged, or an invalid one that was not, quoted from the record. -->
-Not run yet.
+Nothing failed on these forms, and that is a fact about the forms.
+The 25 invalid values are blatant (`asdf`, `test test`, `hello`), and every one was caught, with no false warning among 95 valid fields.
+With 8 or 9 invalid values per field the data cannot say the false-warning rate is below about one in ten.
+A real form has unusual but real job titles and half-typed messages, and this record says nothing about them.
+Try it on a few hundred of your own submissions before you trust the 0.30 threshold.
 
 ## The clip
 

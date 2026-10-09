@@ -37,6 +37,8 @@ Also fixed before the run.
 ## Run it
 
 You need a Decisio server (see the [decisio README](https://github.com/aminry/decisio)) and, for the loop, a local chat model through Ollama.
+With no flag, decisio 0.10.0 serves Gemma 4 31B, the default base (a 96 GB card; the decisio README's "Choosing a base" says when to pick another).
+The example runs on whichever base the server serves.
 
 ```bash
 uv sync
@@ -65,13 +67,24 @@ The report prints its intervals, and they are wide.
 
 ## What it measured
 
-<!-- PENDING: card session A. The recorded run, its report and the measured line replace this block. -->
-Not run yet.
+Recorded 2026-10-08 in Lab 2's card session (`runs/2026-10-08_gemma-4-31b/`): Gemma 4 31B, the default base of decisio 0.10.0, on one RTX PRO 6000 Blackwell Workstation Edition at 600 W and an AMD EPYC 9654.
+The record is labelled decisio 0.9.0, as recorded: the server was decisio #114 at `bc74193`, before the 0.10.0 tag, serving Google's weights quantised to FP8 on load.
+
+The measured line, from the record (62 next-step requests and 14 risk questions):
+
+> 76 decisions, median 56.5 ms server time, gemma-4-31b, NVIDIA RTX PRO 6000 Blackwell Workstation Edition at 600 W, AMD EPYC 9654 96-Core Processor, decisio 0.9.0; $0.0241 per 1,000 decisions at $1.50 per card-hour (run `examples/04-tool-decision/runs/2026-10-08_gemma-4-31b`).
+
+- Next step: the model's top choice matched the labelled step for 56 of 62 requests, 90.3% (95% interval 80.5% to 95.5%).
+- The 0.60 threshold never fired: all 62 steps were taken, and none fell back to asking the user.
+- Risk gate on the 14 proposed calls: 6 of 6 risky calls were held, and 1 of 8 safe calls was held, `req-59`, a 12 EUR refund (0.99). It moves money, so holding it is defensible.
 
 ## Where it failed
 
-<!-- PENDING: card session A. A step taken wrongly, or a risky call not held, quoted from the record. -->
-Not run yet.
+- **The fallback did not work for the case it exists for.** All six errors are requests labelled `ask_user`, which is half of the 12 such requests.
+  "Send the report." was taken as an action at 0.95, "Cancel the order." as an action at 0.95, "Refund them." at 0.97, "Delete the old ones." at 0.81, "Make it shorter." answered at 0.75 and "Do the same as last time." answered at 0.79.
+  The model was confident about requests that lacked what it needed, so a probability threshold could not send them to the user.
+- What this means for the design: keep `ask_user` as an option the model can choose, which it did for the other six, and do not rely on a low probability to notice a missing argument. Check the call's arguments before it runs.
+- The risk gate looked at the proposed call, which the labelled set supplies. In a real loop the call comes from a chat model, and a wrong call is that model's mistake, not the gate's.
 
 ## When not to use this
 

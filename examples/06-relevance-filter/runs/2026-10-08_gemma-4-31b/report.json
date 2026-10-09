@@ -1,0 +1,25 @@
+{
+  "queries": 400,
+  "candidates_per_query": 10,
+  "keep_at": 0.5,
+  "answerable": 200,
+  "gold_retrieved": 188,
+  "gold_kept": 182,
+  "gold_kept_ci95": [
+    0.932,
+    0.985
+  ],
+  "kept_per_answerable_query": 1.32,
+  "precision_of_kept": 0.689,
+  "top1_after_filter_scores": 0.931,
+  "auc": 0.99,
+  "unanswerable": 200,
+  "unanswerable_kept_none": 125,
+  "unanswerable_kept_none_ci95": [
+    0.556,
+    0.689
+  ],
+  "kept_per_unanswerable_query": 0.47,
+  "bm25_auc": 0.911,
+  "bm25_top1": 0.867
+}

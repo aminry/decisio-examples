@@ -29,7 +29,8 @@ The sweep table below shows what other values would have done, so you can pick y
 
 You need a Decisio server.
 The README of [decisio](https://github.com/aminry/decisio) has the GPU, Docker, Mac and Ollama paths.
-This example was written against decisio 0.9.0 and runs on whichever base the server serves; it names none.
+With no flag, decisio 0.10.0 serves Gemma 4 31B, the default base (a 96 GB card; the decisio README's "Choosing a base" says when to pick another).
+The example runs on whichever base the server serves.
 
 ```bash
 git clone https://github.com/aminry/decisio-examples
@@ -53,13 +54,26 @@ Six urgent tickets is a small number, so read the urgent line as an illustration
 
 ## What it measured
 
-<!-- PENDING: card session A. The recorded run, its report and the measured line replace this block. -->
-Not run yet.
+Recorded 2026-10-08 in Lab 2's card session (`runs/2026-10-08_gemma-4-31b/`): Gemma 4 31B, the default base of decisio 0.10.0, on one RTX PRO 6000 Blackwell Workstation Edition at 600 W and an AMD EPYC 9654.
+The record is labelled decisio 0.9.0, as recorded: the server was decisio #114 at `bc74193`, before the 0.10.0 tag, serving Google's weights quantised to FP8 on load.
+
+The measured line, from the record:
+
+> 60 decisions, median 77.6 ms server time, gemma-4-31b, NVIDIA RTX PRO 6000 Blackwell Workstation Edition at 600 W, AMD EPYC 9654 96-Core Processor, decisio 0.9.0; $0.0324 per 1,000 decisions at $1.50 per card-hour (run `examples/01-support-routing/runs/2026-10-08_gemma-4-31b`).
+
+- At the preset, 58 of 60 tickets were routed and 57 were right: 98.3% (95% interval 90.9% to 99.7%).
+- The two that went to a person were `c7` (a cancellation with a refund demand, routed to billing at 0.58) and `o8` (a security-whitepaper request, `other` at 0.70, under the threshold).
+- Raising the threshold to 0.90 routed 57 tickets and all 57 were right. At 0.95 it routed 49, also all right.
+- Sixty synthetic tickets, ten per queue, are easy: read the intervals, not the point values.
 
 ## Where it failed
 
-<!-- PENDING: card session A. The most confident wrong answer of the recorded run, quoted from its record. -->
-Not run yet.
+- **The paging threshold was wrong.** Fixed before the run at 0.50, it paged 29 of the 60 tickets. Only 6 are urgent, so 23 pages were false.
+  All six urgent tickets scored 0.98 or higher, but so did one ticket that is not urgent, so no threshold on this probability separates them.
+  The model reads "within the hour" generously: a password reset (`a2`, 0.85), an expired invite link (`a9`, 0.96) and an empty CSV export (`g1`, 0.96) all scored as urgent.
+  The fix is in the question, not the threshold: say what "urgent" means in your desk's terms, and measure it on your own tickets.
+- **The one confident routing error** was `f4`, "We need single-sign-on with Azure AD. Is it on the roadmap and when?", labelled `feature` and routed to `access` at 0.85.
+  Single sign-on is a login feature, so the label is arguable. It is the kind of error a threshold does not catch.
 
 ## When not to use this
 

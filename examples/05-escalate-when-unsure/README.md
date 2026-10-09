@@ -35,6 +35,8 @@ Anything above that is what the probability buys.
 ## Run it
 
 You need a Decisio server (see the [decisio README](https://github.com/aminry/decisio)).
+With no flag, decisio 0.10.0 serves Gemma 4 31B, the default base (a 96 GB card; the decisio README's "Choosing a base" says when to pick another).
+The example runs on whichever base the server serves.
 
 ```bash
 uv sync
@@ -58,13 +60,27 @@ The temperatures Decisio serves were fitted on a private suite that does not con
 
 ## What it measured
 
-<!-- PENDING: card session A. The recorded run, its report and the measured line replace this block. -->
-Not run yet.
+Recorded 2026-10-08 in Lab 2's card session (`runs/2026-10-08_gemma-4-31b/`): Gemma 4 31B, the default base of decisio 0.10.0, on one RTX PRO 6000 Blackwell Workstation Edition at 600 W and an AMD EPYC 9654.
+The record is labelled decisio 0.9.0, as recorded: the server was decisio #114 at `bc74193`, before the 0.10.0 tag, serving Google's weights quantised to FP8 on load.
+
+The measured line, from the record:
+
+> 1172 decisions, median 55.4 ms server time, gemma-4-31b, NVIDIA RTX PRO 6000 Blackwell Workstation Edition at 600 W, AMD EPYC 9654 96-Core Processor, decisio 0.9.0; $0.0231 per 1,000 decisions at $1.50 per card-hour (run `examples/05-escalate-when-unsure/runs/2026-10-08_gemma-4-31b`).
+
+- Overall accuracy 97.4% (31 wrong of 1,172); ECE 0.022 over 10 equal-mass bins.
+- At the preset (keep at 0.80): 1,145 kept (98%), 98.5% right among them (95% interval 97.6% to 99.1%); 27 escalated, which holds 14 of the 31 wrong answers.
+  Escalating 27 questions at random would hold fewer than one of them (about 0.7).
+- The probability is not spread out: 80% of the questions score between 0.967 and 0.991.
+  Below that band the lowest fifth (234 questions) has mean probability 0.909 and accuracy 88.9%.
+  Thresholds above 0.95 do little, and at 0.99 only 5 questions are kept.
 
 ## Where it failed
 
-<!-- PENDING: card session A. The most confident wrong answer of the recorded run, quoted by id from the record. -->
-Not run yet.
+- **More than half of the errors were confident.** 17 of the 31 wrong answers scored 0.80 or higher and were kept.
+  The most confident, `Mercury_177748`, scored 0.989, then `Mercury_7236513` at 0.983 and `Mercury_7015208` at 0.979.
+  Escalation on the probability finds the questions the model is unsure about. It does not find the ones it is wrong and sure about, and on this set those are the larger group.
+- **The scale is compressed.** Four fifths of the questions fall in a band 0.024 wide, so the threshold's useful range is narrow, and a value picked from a plot of 0.5 to 1.0 will misjudge it.
+- ARC is public and may be in a model's training data. Decisio's own temperatures were fitted on a private suite without it (`EVAL_CARD.md` section 4), but the model underneath may have seen it.
 
 ## When not to use this
 

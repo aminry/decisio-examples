@@ -1,0 +1,66 @@
+{
+  "requests": 62,
+  "take_at": 0.6,
+  "hold_at": 0.5,
+  "argmax_right": 56,
+  "taken": 62,
+  "taken_right": 56,
+  "fell_back_to_ask": 0,
+  "wrong_and_taken": [
+    [
+      "req-37",
+      "ask_user",
+      "act",
+      0.9509
+    ],
+    [
+      "req-40",
+      "ask_user",
+      "act",
+      0.9491
+    ],
+    [
+      "req-42",
+      "ask_user",
+      "answer",
+      0.7548
+    ],
+    [
+      "req-43",
+      "ask_user",
+      "act",
+      0.811
+    ],
+    [
+      "req-46",
+      "ask_user",
+      "answer",
+      0.7944
+    ],
+    [
+      "req-47",
+      "ask_user",
+      "act",
+      0.9718
+    ]
+  ],
+  "confusion": {
+    "act->act": 14,
+    "answer->answer": 12,
+    "ask_user->act": 4,
+    "ask_user->answer": 2,
+    "ask_user->ask_user": 6,
+    "calculate->calculate": 12,
+    "search->search": 12
+  },
+  "risk": {
+    "calls": 14,
+    "risky": 6,
+    "risky_held": 6,
+    "safe": 8,
+    "safe_held": [
+      "req-59"
+    ],
+    "risky_not_held": []
+  }
+}

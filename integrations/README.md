@@ -24,6 +24,10 @@ Recorded 2026-10-07 against the CPU stand-in (Qwen3-0.6B-Base, `hf_letters`, not
 Every "emulated" above means the same thing: the stand-in server has no abstain option, so a proxy adds the two fields Decisio documents for `--abstain-option` (`unknown_probability`, `abstained`) to a real answer.
 Run the checks against a server started with an abstain option to replace the emulation with a real result.
 
+Rerun on 2026-10-08 against the card server (Gemma 4 31B on an RTX PRO 6000, through an SSH tunnel from the Mac), with the same pins: every integration passed the same number of checks (42, 42, 44, 39 and 39 of the same totals).
+The abstention checks are still emulated, because that server was not started with an abstain option.
+The files are in `results-card-2026-10-08/`, from Lab 2's session record.
+
 ## Run
 
 ```bash

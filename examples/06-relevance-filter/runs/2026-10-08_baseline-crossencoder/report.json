@@ -1,0 +1,27 @@
+{
+  "queries": 400,
+  "candidates_per_query": 10,
+  "keep_at": 2.9229953289031982,
+  "answerable": 200,
+  "gold_retrieved": 188,
+  "gold_kept": 144,
+  "gold_kept_ci95": [
+    0.7,
+    0.821
+  ],
+  "kept_per_answerable_query": 1.1,
+  "precision_of_kept": 0.655,
+  "top1_after_filter_scores": 0.92,
+  "auc": 0.966,
+  "unanswerable": 200,
+  "unanswerable_kept_none": 86,
+  "unanswerable_kept_none_ci95": [
+    0.363,
+    0.499
+  ],
+  "kept_per_unanswerable_query": 0.69,
+  "bm25_auc": 0.911,
+  "bm25_top1": 0.867,
+  "matched_kept_per_query": 0.895,
+  "model": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+}

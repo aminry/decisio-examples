@@ -49,6 +49,8 @@ uv run examples/06-relevance-filter/baseline_crossencoder.py --match-run example
 ## Run it
 
 You need a Decisio server (see the [decisio README](https://github.com/aminry/decisio)).
+With no flag, decisio 0.10.0 serves Gemma 4 31B, the default base (a 96 GB card; the decisio README's "Choosing a base" says when to pick another).
+The example runs on whichever base the server serves.
 
 ```bash
 uv sync
@@ -71,13 +73,33 @@ The file is downloaded on first use and checked against a recorded sha256, and t
 
 ## What it measured
 
-<!-- PENDING: card session A. The recorded run, its report, the cross-encoder's report and the measured line replace this block. -->
-Not run yet.
+Recorded 2026-10-08 in Lab 2's card session (`runs/2026-10-08_gemma-4-31b/`): Gemma 4 31B, the default base of decisio 0.10.0, on one RTX PRO 6000 Blackwell Workstation Edition at 600 W and an AMD EPYC 9654.
+The record is labelled decisio 0.9.0, as recorded: the server was decisio #114 at `bc74193`, before the 0.10.0 tag, serving Google's weights quantised to FP8 on load.
+
+The measured line, from the record. A decision here is one request with ten passage questions, so the cost is per 1,000 queries, which is 10,000 passage judgements:
+
+> 400 decisions, median 317.6 ms server time, gemma-4-31b, NVIDIA RTX PRO 6000 Blackwell Workstation Edition at 600 W, AMD EPYC 9654 96-Core Processor, decisio 0.9.0; $0.1352 per 1,000 decisions at $1.50 per card-hour (run `examples/06-relevance-filter/runs/2026-10-08_gemma-4-31b`).
+
+At the preset (keep at 0.50), and the cross-encoder at the same amount of context (`runs/2026-10-08_baseline-crossencoder/`, `cross-encoder/ms-marco-MiniLM-L-6-v2`, with its threshold chosen to keep as many passages per query on average):
+
+| | Decisio | Cross-encoder | BM25 alone |
+| --- | ---: | ---: | ---: |
+| Relevant paragraph kept (of the 188 answerable queries where BM25's top ten held it) | 182, 96.8% | 144, 76.6% | all 188 |
+| Passages kept per answerable query, of ten | 1.32 | 1.10 | 10 |
+| Relevant paragraph first (of those 188) | 93.1% | 92.0% | 86.7% |
+| AUC, relevant against irrelevant | 0.990 | 0.966 | 0.911 |
+| Unanswerable queries where nothing was kept (of 200) | 125, 62.5% | 86, 43.0% | 0 |
+
+- BM25's top ten held the relevant paragraph for 188 of the 200 answerable queries, so 12 were out of the filter's reach.
+- Decisio's median server time was 317.6 ms per query, on a 96 GB card. The cross-encoder scored all 400 queries in 5.7 seconds on a laptop CPU.
+  That is a large difference in cost, and a laptop reranker is the cheaper tool where its quality is enough.
 
 ## Where it failed
 
-<!-- PENDING: card session A. A query whose relevant paragraph was dropped, or an unanswerable one that kept passages, quoted by id from the record. -->
-Not run yet.
+- **Six relevant paragraphs were dropped** out of 188: `572f5703a23a5019007fc576` (0.41, first in BM25's order), `57281ab63acd2414000df494` (0.19) and four others below 0.06.
+- **Unanswerable queries still kept passages for 75 of 200.** These are questions written to look answerable, and the filter sees the paragraph that looks like the answer.
+  The README's reading of "kept nothing" is harsh, since another paragraph in the pool might answer, but the number is what it is.
+- **The comparison is a snapshot.** One sample of 400 queries, a fixed seed, one small reranker. A larger reranker, or a threshold tuned on labelled data for either method, would move it.
 
 ## When not to use this
 
